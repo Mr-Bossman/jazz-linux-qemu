@@ -1,0 +1,47 @@
+From 82669f9edf85e1de9057486a712276b96236d408 Mon Sep 17 00:00:00 2001
+From: Jesse Taube <Mr.Bossman075@gmail.com>
+Date: Wed, 17 Jun 2026 15:55:43 -0400
+Subject: [PATCH] Jazz arc fixes
+
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+ arch/mips/fw/arc/identify.c | 6 ++++--
+ arch/mips/mm/init.c         | 2 +-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/arch/mips/fw/arc/identify.c b/arch/mips/fw/arc/identify.c
+index 5527e0f54079..93557929260c 100644
+--- a/arch/mips/fw/arc/identify.c
++++ b/arch/mips/fw/arc/identify.c
+@@ -98,11 +98,13 @@ void __init prom_identify_arch(void)
+ 	 * The root component tells us what machine architecture we have here.
+ 	 */
+ 	p = ArcGetChild(PROM_NULL_COMPONENT);
+-	if (p == NULL) {
++/*
++	if (p == NULL || p->iname == 0) {
+ 		iname = "Unknown";
+ 	} else
+ 		iname = (char *) (long) p->iname;
+-
++*/
++	iname = "Microsoft-Jazz";
+ 	printk("ARCH: %s\n", iname);
+ 	mach = string_to_mach(iname);
+ 	system_type = mach->liname;
+diff --git a/arch/mips/mm/init.c b/arch/mips/mm/init.c
+index e8660d06f663..c72674c7efe6 100644
+--- a/arch/mips/mm/init.c
++++ b/arch/mips/mm/init.c
+@@ -496,7 +496,7 @@ void __weak __init prom_free_prom_memory(void)
+ 
+ void __ref free_initmem(void)
+ {
+-	prom_free_prom_memory();
++//	prom_free_prom_memory();
+ 	/*
+ 	 * Let the platform define a specific function to free the
+ 	 * init section since EVA may have used any possible mapping
+-- 
+2.53.0
+
