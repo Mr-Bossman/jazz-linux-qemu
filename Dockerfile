@@ -126,6 +126,9 @@ apt install -y locales
 locale-gen en_US.UTF-8
 echo -e "password\npassword" | passwd
 apt install -y ./*.deb
+
+# Weird bug, where the initramfs is huge
+update-initramfs -ck all
 EOT
 cp "\$MOUNTDIR"/vmlinux . || true
 cp "\$MOUNTDIR"/initrd.img . || true
