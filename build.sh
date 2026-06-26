@@ -75,15 +75,3 @@ dpkg-architecture -a mipsel -c "make -f debian/rules.gen setup_mipsel_none"
 ./scripts/config -d CONFIG_RD_ZSTD -e CONFIG_FB_G364 -e CONFIG_JAZZ_ESP --file debian/build/build_mipsel_none_4kc-malta/.config
 dpkg-architecture -a mipsel -c "make -C debian/build/build_mipsel_none_4kc-malta olddefconfig"
 dpkg-architecture -a mipsel -c "DEB_RULES_REQUIRES_ROOT=no make -f debian/rules.gen binary-arch_mipsel_none_4kc-malta_real_image -j$(nproc)"
-#CONFIG_FB_G364=y
-#CONFIG_JAZZ_ESP=y
-#CONFIG_MIPS_JAZZ_SONIC=y
-#CONFIG_SERIAL_8250_DETECT_IRQ=y
-#ZSTD_INIT=n
-
-#CONFIG_VT_HW_CONSOLE_BINDING=y
-#CONFIG_SERIAL_8250=y
-#CONFIG_SERIAL_8250_CONSOLE=y
-#CONFIG_SERIAL_8250_EXTENDED=y
-#CONFIG_SERIAL_8250_SHARE_IRQ=y
-#CONFIG_SERIAL_8250_RSA=y
