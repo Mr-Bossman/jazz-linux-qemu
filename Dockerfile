@@ -41,6 +41,23 @@ RUN apt update && \
 	rm -rf /var/lib/apt/lists/* && \
 	apt-get clean
 RUN <<EOF cat | patch -p1 -d linux-*
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 15cb692b0a09..b9404940cc55 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -421,6 +421,12 @@ config MACH_JAZZ
+ 	select I8259
+ 	select ISA
+ 	select SYS_HAS_CPU_R4X00
++	select SYS_HAS_CPU_MIPS32_R1
++	select SYS_HAS_CPU_MIPS32_R2
++	select SYS_HAS_CPU_MIPS32_R6
++	select SYS_HAS_CPU_MIPS64_R1
++	select SYS_HAS_CPU_MIPS64_R2
++	select SYS_HAS_CPU_MIPS64_R6
+ 	select SYS_SUPPORTS_32BIT_KERNEL
+ 	select SYS_SUPPORTS_64BIT_KERNEL
+ 	select SYS_SUPPORTS_100HZ
 diff --git a/arch/mips/fw/arc/identify.c b/arch/mips/fw/arc/identify.c
 index 5527e0f54079..93557929260c 100644
 --- a/arch/mips/fw/arc/identify.c
@@ -232,4 +249,4 @@ EOF
 RUN wget http://web.archive.org/web/20150809205748if_/http://hpoussineau.free.fr/qemu/firmware/magnum-4000/setup.zip && \
 	unzip -o setup.zip NTPROM.RAW && \
 	rm setup.zip
-RUN echo qemu-system-mips64el -M magnum -m 128 -net nic -net user -global ds1225y.filename=nvram -bios NTPROM.RAW -hda disk.img
+RUN echo qemu-system-mips64el -M magnum -cpu MIPS64R2-generic -m 128 -net nic -net user -global ds1225y.filename=nvram -bios NTPROM.RAW -hda disk.img

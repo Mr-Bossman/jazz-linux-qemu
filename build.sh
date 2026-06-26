@@ -10,6 +10,23 @@ apt install -y dpkg-dev debhelper quilt python3 flex bison gcc-mipsel-linux-gnu 
 apt source -t bookworm linux
 cd linux-*
 cat <<EOF | patch -p1
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 15cb692b0a09..b9404940cc55 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -421,6 +421,12 @@ config MACH_JAZZ
+ 	select I8259
+ 	select ISA
+ 	select SYS_HAS_CPU_R4X00
++	select SYS_HAS_CPU_MIPS32_R1
++	select SYS_HAS_CPU_MIPS32_R2
++	select SYS_HAS_CPU_MIPS32_R6
++	select SYS_HAS_CPU_MIPS64_R1
++	select SYS_HAS_CPU_MIPS64_R2
++	select SYS_HAS_CPU_MIPS64_R6
+ 	select SYS_SUPPORTS_32BIT_KERNEL
+ 	select SYS_SUPPORTS_64BIT_KERNEL
+ 	select SYS_SUPPORTS_100HZ
 diff --git a/arch/mips/fw/arc/identify.c b/arch/mips/fw/arc/identify.c
 index 5527e0f54079..93557929260c 100644
 --- a/arch/mips/fw/arc/identify.c

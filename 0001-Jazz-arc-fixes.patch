@@ -1,14 +1,32 @@
-From 82669f9edf85e1de9057486a712276b96236d408 Mon Sep 17 00:00:00 2001
+From 881a820a750c890d2ea7b0e48554dc7f9c152b00 Mon Sep 17 00:00:00 2001
 From: Jesse Taube <Mr.Bossman075@gmail.com>
 Date: Wed, 17 Jun 2026 15:55:43 -0400
 Subject: [PATCH] Jazz arc fixes
 
 Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 ---
+ arch/mips/Kconfig           | 6 ++++++
  arch/mips/fw/arc/identify.c | 6 ++++--
  arch/mips/mm/init.c         | 2 +-
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ 3 files changed, 11 insertions(+), 3 deletions(-)
 
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 15cb692b0a09..b9404940cc55 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -421,6 +421,12 @@ config MACH_JAZZ
+ 	select I8259
+ 	select ISA
+ 	select SYS_HAS_CPU_R4X00
++	select SYS_HAS_CPU_MIPS32_R1
++	select SYS_HAS_CPU_MIPS32_R2
++	select SYS_HAS_CPU_MIPS32_R6
++	select SYS_HAS_CPU_MIPS64_R1
++	select SYS_HAS_CPU_MIPS64_R2
++	select SYS_HAS_CPU_MIPS64_R6
+ 	select SYS_SUPPORTS_32BIT_KERNEL
+ 	select SYS_SUPPORTS_64BIT_KERNEL
+ 	select SYS_SUPPORTS_100HZ
 diff --git a/arch/mips/fw/arc/identify.c b/arch/mips/fw/arc/identify.c
 index 5527e0f54079..93557929260c 100644
 --- a/arch/mips/fw/arc/identify.c
