@@ -6,11 +6,10 @@
 # podman build -v $(pwd):/workspace --target build-kernel .
 # podman build -v $(pwd):/workspace --device /dev/fuse --cap-add SYS_ADMIN --target rootfs .
 # podman build -v $(pwd):/workspace --target final .
-# qemu-system-mips64el -M magnum -m 128 -net nic -net user -global ds1225y.filename=nvram -bios NTPROM.RAW -hda disk.img
+# qemu-system-mips64el -M magnum -cpu MIPS64R2-generic -m 128 -net nic -net user -global ds1225y.filename=nvram -bios NTPROM.RAW -hda disk.img
 
 # rootfs may take a while, you can use your host debootstrap to speed it up.
-# GRUB actually faults after loading the kernel/initrd, this also happens on when using
-# mips-arc on a SGI Indy
+
 
 FROM debian:latest as build-grub
 RUN apt-get update && \
